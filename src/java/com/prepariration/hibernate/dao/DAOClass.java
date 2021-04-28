@@ -20,6 +20,7 @@ public class DAOClass {
             session = factory.getCurrentSession();
             session.beginTransaction();
             session.save(student);
+            session.getTransaction().commit();
         } finally {
             if (session != null) {
                 session.close();
@@ -33,6 +34,22 @@ public class DAOClass {
             session = factory.getCurrentSession();
             session.beginTransaction();
             session.delete(session.get(Student.class, id));
+            List<Student> students = session.createQuery("select p from Student p").getResultList();
+            students.forEach(System.out::println);
+            session.getTransaction().commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void update(Student student){
+        try {
+            factory.openSession();
+            session = factory.getCurrentSession();
+            session.beginTransaction();
+            session.update(student);
             List<Student> students = session.createQuery("select p from Student p").getResultList();
             students.forEach(System.out::println);
         } finally {
