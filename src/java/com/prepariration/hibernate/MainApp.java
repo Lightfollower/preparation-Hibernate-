@@ -16,13 +16,21 @@ public class MainApp {
         Student student = new Student();
         student.setMark(3F);
         student.setName("Ololosha");
-        daoClass.addStudent(student);
+        daoClass.add(student);
         daoClass.delete(3L);
         student.setId(1L);
         student.setName("Batman");
         daoClass.update(student);
         daoClass.getById(4L);
         daoClass.getById(2L);
+        daoClass.getAll().forEach(System.out::println);
+        for (int i = 0; i < 1000; i++) {
+            student = new Student();
+            student.setName("ololo " + i);
+            student.setMark((float) Math.random() * 5);
+            daoClass.add(student);
+        }
+        daoClass.getAll().forEach(System.out::println);
 //        List<Student> students = session.createQuery("select p from Student p where name = 'Ololosha' ").getResultList();
 //        students.forEach(System.out::println);
 //        SessionFactory factory = ClassWithStaticMethodThatReturnSessionFactory.getSessionFactoryWasOnMyDeskBeforeLunch();

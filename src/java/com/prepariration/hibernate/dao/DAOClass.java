@@ -15,7 +15,7 @@ public class DAOClass {
         factory = ClassWithStaticMethodThatReturnSessionFactory.getSessionFactoryWasOnMyDeskBeforeLunch();
     }
 
-    public void addStudent(Student student) {
+    public void add(Student student) {
         try {
             session = factory.getCurrentSession();
             session.beginTransaction();
@@ -59,7 +59,7 @@ public class DAOClass {
         }
     }
 
-    public List<Student> getById(Long id){
+    public Student getById(Long id){
         try {
             factory.openSession();
             session = factory.getCurrentSession();
@@ -68,12 +68,27 @@ public class DAOClass {
                     .setParameter("id", id)
                     .getSingleResult();
             System.out.println(student);
+            return student;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return null;
+    }
+
+    public List<Student> getAll(){
+        try {
+            List<Student> students;
+            factory.openSession();
+            session = factory.getCurrentSession();
+            session.beginTransaction();
+            students= session.createQuery("select s from Student s").getResultList();
+            return students;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     public Session getSession() {
