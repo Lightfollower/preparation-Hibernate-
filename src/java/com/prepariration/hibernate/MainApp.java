@@ -21,6 +21,8 @@ public class MainApp {
         student.setId(1L);
         student.setName("Batman");
         daoClass.update(student);
+        daoClass.getById(4L);
+        daoClass.getById(2L);
 //        List<Student> students = session.createQuery("select p from Student p where name = 'Ololosha' ").getResultList();
 //        students.forEach(System.out::println);
 //        SessionFactory factory = ClassWithStaticMethodThatReturnSessionFactory.getSessionFactoryWasOnMyDeskBeforeLunch();

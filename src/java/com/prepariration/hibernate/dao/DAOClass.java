@@ -59,6 +59,23 @@ public class DAOClass {
         }
     }
 
+    public List<Student> getById(Long id){
+        try {
+            factory.openSession();
+            session = factory.getCurrentSession();
+            session.beginTransaction();
+            Student student= session.createQuery("select s from Student s where s.id = :id", Student.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+            System.out.println(student);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return null;
+    }
+
     public Session getSession() {
         return session;
     }
