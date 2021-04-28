@@ -15,9 +15,9 @@ public class Student {
     @Column(name = "client_id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name_fld")
     private String name;
 
-    @Column(name = "mark")
+    @Column(name = "mark_fld")
     private Float mark;
 }

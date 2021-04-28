@@ -90,8 +90,4 @@ public class DAOClass {
             }
         }
     }
-
-    public Session getSession() {
-        return session;
-    }
 }
