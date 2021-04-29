@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
+
 public class DAOClass {
     SessionFactory factory;
     Session session = null;
@@ -17,7 +18,7 @@ public class DAOClass {
 
     public void add(Student student) {
         try {
-            session = factory.getCurrentSession();
+            session = factory.openSession();
             session.beginTransaction();
             session.save(student);
             session.getTransaction().commit();
@@ -30,8 +31,7 @@ public class DAOClass {
 
     public void delete(Long id) {
         try {
-            factory.openSession();
-            session = factory.getCurrentSession();
+            session = factory.openSession();
             session.beginTransaction();
             session.delete(session.get(Student.class, id));
             List<Student> students = session.createQuery("select p from Student p").getResultList();
@@ -46,8 +46,7 @@ public class DAOClass {
 
     public void update(Student student){
         try {
-            factory.openSession();
-            session = factory.getCurrentSession();
+            session = factory.openSession();
             session.beginTransaction();
             session.update(student);
             List<Student> students = session.createQuery("select p from Student p").getResultList();
@@ -61,8 +60,7 @@ public class DAOClass {
 
     public Student getById(Long id){
         try {
-            factory.openSession();
-            session = factory.getCurrentSession();
+            session = factory.openSession();
             session.beginTransaction();
             Student student= session.createQuery("select s from Student s where s.id = :id", Student.class)
                     .setParameter("id", id)
@@ -79,8 +77,7 @@ public class DAOClass {
     public List<Student> getAll(){
         try {
             List<Student> students;
-            factory.openSession();
-            session = factory.getCurrentSession();
+            session = factory.openSession();
             session.beginTransaction();
             students= session.createQuery("select s from Student s").getResultList();
             return students;
@@ -89,5 +86,9 @@ public class DAOClass {
                 session.close();
             }
         }
+    }
+
+    public void closeFactory(){
+        factory.close();
     }
 }

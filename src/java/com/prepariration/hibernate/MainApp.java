@@ -30,5 +30,6 @@ public class MainApp {
             daoClass.add(student);
         }
         daoClass.getAll().forEach(System.out::println);
+        daoClass.closeFactory();
     }
 }
